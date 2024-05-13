@@ -6,4 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\js\regulareEmail.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\regulareEmail.js" />
+  </ItemGroup>
+
 </Project>

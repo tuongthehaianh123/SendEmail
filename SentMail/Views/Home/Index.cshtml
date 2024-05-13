@@ -1,75 +1,71 @@
 ﻿@model SentMail.Models.EmailEntity
-
-<div class="card shadow border-0">
-    <div class="accordion-header bg-secondary bg-gradient">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h2>Send Email</h2>
-            </div>
-        </div>
-    </div>
-    <div class="card-body p-2">
-        <form method="post" asp-action="SendEmail" enctype="multipart/form-data" onsubmit="return validateForm()">
-            <div class="col-12">
-                <label>To Email</label>
-                <input asp-for="ToEmailAddress" id="ToEmailAddress" class="form-control" />
-            </div>
-            <div class="col-12">
-                <label>CC</label>
-                <input asp-for="CCAddress" class="form-control" />
-            </div>
-            <div class="col-12">
-                <label>Subject Email</label>
-                <input asp-for="Subject" class="form-control" />
-            </div>
-            <div class="col-12">
-                <label>Message Email</label>
-                <textarea asp-for="EmailBodyMessage" rows="5" cols="20" class="form-control"></textarea>
-            </div>
-            <div class="col-12">
-                <label>Select File</label>
-                <input type="file" name="PostedFile" asp-for="AttachmentURL" class="form-control" multiple />
-            </div>
-            <br>
+<html>
+<body>
+    <div class="card shadow border-0">
+        <div class="accordion-header bg-secondary bg-gradient">
             <div class="row">
-                <div class="col-2">
-                    <div class="col-9">
-                        <input type="radio" id="html" name="OptionSend" value="1" checked>
-                        <label for="html">Send One</label><br>
-                        <input type="radio" id="css" name="OptionSend" value="2">
-                        <label for="css">Send Multiple</label>
-                    </div>
-                    <button type="submit" value="1" class="btn btn-primary">Send Email</button>
+                <div class="col-12 text-center">
+                    <h2>Send Email</h2>
                 </div>
             </div>
-        </form>
+        </div>
+        <div class="card-body p-2">
+            <form method="post" asp-action="SendEmail" enctype="multipart/form-data" onsubmit="return validateForm()">
+                <div class="col-12">
+                    <label>To Email</label>
+                    <input asp-for="ToEmailAddress" id="ToEmailAddress" class="form-control" />
+                </div>
+                <div class="col-12">
+                    <label>CC</label>
+                    <input asp-for="CCAddress" class="form-control" />
+                </div>
+                <div class="col-12">
+                    <label>Subject Email</label>
+                    <input asp-for="Subject" class="form-control" />
+                </div>
+                <div class="col-12">
+                    <label>Message Email</label>
+                    <textarea asp-for="EmailBodyMessage" rows="5" cols="20" class="form-control"></textarea>
+                </div>
+                <div class="col-12">
+                    <label>Select File</label>
+                    <input type="file" name="PostedFile" asp-for="AttachmentURL" class="form-control" multiple />
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-2">
+                        <div class="col-9">
+                            <input type="radio" id="html" name="OptionSend" value="1" checked>
+                            <label for="html">Send One</label><br>
+                            <input type="radio" id="css" name="OptionSend" value="2">
+                            <label for="css">Send Multiple</label>
+                        </div>
+                        <button type="submit" value="1" class="btn btn-primary">Send Email</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-<script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="~/js/regulareEmail.js"></script>
 <script>
-    function validateForm() {
+        function validateForm() {
         let toEmail = document.getElementById("ToEmailAddress").value;
-        if (toEmail.trim() === "") {
-            alert("To Email must be filled out");
-            return false;
-        }
-        // Add more validation rules if needed
-        return true; // If all validations pass
-    }
-        let value  =  $('input[name="fav_language"]:checked').val();
-            console.log(value);
-    // function setSendOption() {
-    //    var sendOne = document.getElementById("html").checked;
-    //    var sendMultiple = document.getElementById("css").checked;
+        let validateEmail1 = validateEmail(toEmail);
+            if (toEmail == "") {
+                alert("To Email must be filled out with a valid email address");
+                return false;
+            }
 
-    //    if (sendOne) {
-    //        document.getElementById("ValueSend").value = "1";
-    //    } else if (sendMultiple) {
-    //        document.getElementById("ValueSend").value = "2";
-    //    } else {
-    //        // Không có radio button nào được chọn, xử lý tương ứng (nếu cần)
-    //    }
-    //}
-   
+            if(validateEmail1 == false){
+                alert("Email must be sent in the correct format as abc@gmail.com");
+                return false;
+            }
+            // Add more validation rules if needed
+            return true; // If all validations pass
+        }
+
 
 </script>

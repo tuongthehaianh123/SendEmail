@@ -34,19 +34,18 @@
             <div class="row">
                 <div class="col-2">
                     <div class="col-9">
-                        <input type="radio" id="html" name="fav_language" value="1">
+                        <input type="radio" id="html" name="OptionSend" value="1" checked>
                         <label for="html">Send One</label><br>
-                        <input type="radio" id="css" name="fav_language" value="2">
+                        <input type="radio" id="css" name="OptionSend" value="2">
                         <label for="css">Send Multiple</label>
                     </div>
-                    <button type="submit"onclick="setSendOption()" value="1" class="btn btn-primary">Send Email</button>
-
+                    <button type="submit" value="1" class="btn btn-primary">Send Email</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
-
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     function validateForm() {
         let toEmail = document.getElementById("ToEmailAddress").value;
@@ -57,16 +56,20 @@
         // Add more validation rules if needed
         return true; // If all validations pass
     }
-     function setSendOption() {
-        var sendOne = document.getElementById("html").checked;
-        var sendMultiple = document.getElementById("css").checked;
-    
-        if (sendOne) {
-            document.getElementById("ValueSend").value = "1";
-        } else if (sendMultiple) {
-            document.getElementById("ValueSend").value = "2";
-        } else {
-            // Không có radio button nào được chọn, xử lý tương ứng (nếu cần)
-        }
-    }
+        let value  =  $('input[name="fav_language"]:checked').val();
+            console.log(value);
+    // function setSendOption() {
+    //    var sendOne = document.getElementById("html").checked;
+    //    var sendMultiple = document.getElementById("css").checked;
+
+    //    if (sendOne) {
+    //        document.getElementById("ValueSend").value = "1";
+    //    } else if (sendMultiple) {
+    //        document.getElementById("ValueSend").value = "2";
+    //    } else {
+    //        // Không có radio button nào được chọn, xử lý tương ứng (nếu cần)
+    //    }
+    //}
+   
+
 </script>

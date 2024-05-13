@@ -55,7 +55,7 @@ namespace SentMail.Controllers
                 message.Body = objEmailParameters.EmailBodyMessage;
             }
             message.IsBodyHtml = true;
-            if (!string.IsNullOrEmpty(objEmailParameters.AttachmentURL))
+            if (PostedFile != null)
             {
                 message.Attachments.Add(new Attachment(PostedFile.OpenReadStream(),
                     PostedFile.FileName));
@@ -71,12 +71,23 @@ namespace SentMail.Controllers
                 smtpClient.Port = Port;
                 smtpClient.EnableSsl = true;
                 // Gửi email một lần nhưng gửi cho 10 người nhận cùng một lúc
-                for (int i = 0; i < 10; i++)
+
+                switch (objEmailParameters.OptionSend)
                 {
-                    smtpClient.Send(message);
-                    // Đặt một khoảng thời gian chờ giữa các lần gửi để tránh quá tải máy chủ email
-                    System.Threading.Thread.Sleep(1000); // Chờ 1 giây trước khi gửi email tiếp theo
+                    case "1":
+                        smtpClient.Send(message);
+                        break;
+                    case "2":
+                        for (int i = 0; i < 10; i++)
+                        {
+
+                            // Đặt một khoảng thời gian chờ giữa các lần gửi để tránh quá tải máy chủ email
+                            smtpClient.Send(message);
+                            System.Threading.Thread.Sleep(1000); // Chờ 1 giây trước khi gửi email tiếp theo
+                        }
+                        break;
                 }
+
             }
             catch (Exception ex)
             {

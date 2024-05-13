@@ -12,6 +12,7 @@ namespace SentMail.Models
         public string Subject { get; set; }
         public string EmailBodyMessage  { get; set; }
         public string ValueSend  { get; set; }
+        public string OptionSend { get; set; }
 
         [ValidateNever]
         public string AttachmentURL  { get; set; }
